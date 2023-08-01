@@ -14,6 +14,8 @@ function App() {
   // const [expectedReturn, setExpectedReturn] = useState(0);
   // const [duration, setDuration] = useState(0);
 
+  const [inputData, setInputData] = useState({});
+
   const calculateHandler = (userInput) => {
     let currentSavings = +userInput["current-savings"];
     const yearlyContribution = +userInput["yearly-contribution"];
