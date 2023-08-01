@@ -1,18 +1,28 @@
 import { useState } from "react";
+import classes from "./InvestmentForm.module.css";
+
+const InitialState = {
+  "current-savings": 0,
+  "yearly-contribution": 0,
+  "expected-return": 0,
+  duration: 0,
+};
 
 const Form = (props) => {
-  const [inputData, setInputData] = useState({});
+  const [inputData, setInputData] = useState(InitialState);
+
   const valueChangeHandler = (event) => {
     setInputData((prev) => {
       return {
         ...prev,
-        [event.target.id]: event.target.value,
+        [event.target.id]: +event.target.value,
       };
     });
   };
 
   const resetClickHandler = (event) => {
     event.preventDefault();
+    setInputData(InitialState);
   };
 
   const submitHandler = (event) => {
@@ -21,8 +31,8 @@ const Form = (props) => {
   };
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <div className="input-group">
+    <form className={classes.form} onSubmit={submitHandler}>
+      <div className={classes["input-group"]}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input
@@ -42,7 +52,7 @@ const Form = (props) => {
           />
         </p>
       </div>
-      <div className="input-group">
+      <div className={classes["input-group"]}>
         <p>
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
@@ -64,12 +74,15 @@ const Form = (props) => {
           />
         </p>
       </div>
-      <p className="actions">
-        {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
-        <button type="reset" className="buttonAlt" onClick={resetClickHandler}>
+      <p className={classes.actions}>
+        <button
+          type="reset"
+          className={classes.buttonAlt}
+          onClick={resetClickHandler}
+        >
           Reset
         </button>
-        <button type="submit" className="button">
+        <button type="submit" className={classes.button}>
           Calculate
         </button>
       </p>
